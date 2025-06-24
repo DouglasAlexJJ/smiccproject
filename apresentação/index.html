@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Interativo - Projeto SMICC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate and Sky Blue -->
+    <!-- Application Structure Plan: A single-page, "scrollytelling" dashboard. The structure begins with a high-level summary and a clear 'Problem vs. Solution' comparison. It then flows into an interactive tabbed section for exploring core functionalities, a new visual gallery of app screens for a concrete look-and-feel, a qualitative 'Operational Impact' section, and finally the tech architecture. This flow guides the user from the abstract problem to a tangible, visual solution and its benefits. -->
+    <!-- Visualization & Content Choices: 
+        - Problem vs. Solution: Goal -> Compare. Method -> Two-column layout with lists and icons (HTML/Tailwind). Justification -> Quickly establishes the project's core value proposition.
+        - App Screens Gallery: Goal -> Inform & Visualize. Method -> Responsive grid of image cards with captions (HTML/Tailwind), now using direct links to an external image host (Imgur) for reliability. Justification -> Adds a crucial visual layer, making the application's functionality tangible.
+        - Core Functionalities: Goal -> Organize & Inform. Method -> Tabbed interface (HTML/Tailwind/JS). Interaction -> User clicks tabs to reveal detailed descriptions. Justification -> Allows non-linear exploration of features.
+        - Operational Impact: Goal -> Inform & Emphasize. Method -> Four-column card layout with icons and descriptive text (HTML/Tailwind). Justification -> Focuses on qualitative, factual statements of benefit.
+        - Tech Architecture: Goal -> Inform. Method -> Styled divs representing a flowchart (HTML/Tailwind). Justification -> A clean, visual representation of the technical foundation.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .tab-button.active {
+            background-color: #0284c7; /* sky-600 */
+            color: white;
+            border-color: #0284c7; /* sky-600 */
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <header class="bg-slate-800 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold">Projeto SMICC</h1>
+            <nav>
+                <a href="#problema-solucao" class="hidden sm:inline-block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700">Problema vs Solução</a>
+                <a href="#telas-app" class="hidden sm:inline-block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700">Telas do App</a>
+                <a href="#funcionalidades" class="hidden sm:inline-block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700">Funcionalidades</a>
+                <a href="#impacto" class="hidden sm:inline-block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700">Impacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <section class="text-center py-12 md:py-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-800 mb-4">Revolucionando o Inventário</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-600">O SMICC (Sistema Mobile para Inventário e Contagem Cíclica) transforma um processo manual e lento em um fluxo de trabalho digital, inteligente e instantâneo.</p>
+        </section>
+
+        <section id="problema-solucao" class="py-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">A Transformação Digital do Inventário</h2>
+                <p class="mt-2 text-lg text-slate-500">Uma comparação direta entre o caos manual e a eficiência digital.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-200">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">A Situação ANTES</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><span class="text-red-500 mr-3 text-xl">❌</span><span><strong class="text-slate-800">Processo Manual:</strong> Baseado em listas de papel ineficientes.</span></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-3 text-xl">❌</span><span><strong class="text-slate-800">Alto Risco de Erros:</strong> Digitação, validação incorreta e duplicidade.</span></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-3 text-xl">❌</span><span><strong class="text-slate-800">Lentidão Extrema:</strong> Horas para contar e dias para consolidar dados.</span></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-3 text-xl">❌</span><span><strong class="text-slate-800">Falta de Rastreabilidade:</strong> Impossível saber quem contou o quê.</span></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-3 text-xl">❌</span><span><strong class="text-slate-800">Decisões Atrasadas:</strong> Gestão sem dados precisos em tempo hábil.</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-green-300 ring-2 ring-green-200">
+                    <h3 class="text-2xl font-bold text-green-600 mb-4">O Estado FUTURO com SMICC</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✅</span><span><strong class="text-slate-800">Processo 100% Digital:</strong> App otimizado para coletores Zebra.</span></li>
+                        <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✅</span><span><strong class="text-slate-800">Validação em Tempo Real:</strong> Alertas instantâneos de divergências no local.</span></li>
+                        <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✅</span><span><strong class="text-slate-800">Consolidação Instantânea:</strong> Relatórios gerados em segundos, não em dias.</span></li>
+                        <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✅</span><span><strong class="text-slate-800">Rastreabilidade Total:</strong> Login por matrícula em todas as operações.</span></li>
+                        <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✅</span><span><strong class="text-slate-800">Agilidade Gerencial:</strong> Decisões baseadas em dados precisos e imediatos.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="telas-app" class="py-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Conheça o Aplicativo</h2>
+                <p class="mt-2 text-lg text-slate-500">Uma galeria visual do fluxo de trabalho do SMICC em ação.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
+                    <img src="https://i.imgur.com/zA1T2QE.png" alt="Tela de Login do SMICC" class="rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">1. Tela Inicial</h4>
+                    <p class="text-sm text-slate-600">Login por matrícula para garantir a rastreabilidade de todas as ações.</p>
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
+                    <img src="https://i.imgur.com/VLwwaNu.png" alt="Menu Principal" class="rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">2. Menu Principal</h4>
+                    <p class="text-sm text-slate-600">Escolha entre os módulos de "Validar Etiquetas" ou "Inventário Cíclico".</p>
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
+                    <img src="https://i.imgur.com/JfCfqYI.png" alt="Modo Validação" class="rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">3. Modo Validação</h4>
+                    <p class="text-sm text-slate-600">Opções de "Inventário por Arquivo" (guiado) ou "Leitura Direta" (cega).</p>
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
+                    <img src="https://i.imgur.com/dTxcUuM.png" alt="Tela de Carregar Arquivo" class="rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">4. Carregar Arquivo</h4>
+                    <p class="text-sm text-slate-600">O primeiro passo do modo guiado é carregar o arquivo base (Excel/CSV).</p>
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
+                    <img src="https://i.imgur.com/TcE4vgR.png" alt="Escolha Pós-Carregamento" class="rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">5. Escolha Pós-Carregamento</h4>
+                    <p class="text-sm text-slate-600">Com o arquivo carregado, o sistema confirma o sucesso e apresenta os modos de leitura.</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
+                    <img src="https://i.imgur.com/KHEVyYm.png" alt="Seleção de Localização" class="rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">6. Seleção de Localização</h4>
+                    <p class="text-sm text-slate-600">O operador informa ou lê o código da localização que irá auditar.</p>
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
+                    <img src="https://i.imgur.com/JKMztIO.png" alt="Paletes Validados" class="rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">7. Validação em Andamento</h4>
+                    <p class="text-sm text-slate-600">Feedback visual em tempo real sobre os paletes validados no local.</p>
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
+                    <img src="https://i.imgur.com/VpUUCjS.png" alt="Leitura Direta" class="rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">8. Leitura Direta em Ação</h4>
+                    <p class="text-sm text-slate-600">No modo "cego", o app lista todas as leituras realizadas sequencialmente.</p>
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
+                    <img src="https://i.imgur.com/sVQKoal.png" alt="Confirmar Exclusão" class="rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">9. Ação de Segurança</h4>
+                    <p class="text-sm text-slate-600">Para evitar erros, o sistema solicita confirmação antes de excluir um item.</p>
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
+                    <img src="https://i.imgur.com/OeEeda1.png" alt="Exportar Arquivo" class="rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">10. Exportação</h4>
+                    <p class="text-sm text-slate-600">Ao finalizar, o botão de exportar fica ativo para gerar o relatório consolidado.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="funcionalidades" class="py-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Um App, Múltiplas Soluções</h2>
+                <p class="mt-2 text-lg text-slate-500">Navegue pelas funcionalidades para entender como o SMICC opera no chão de fábrica.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                <button class="tab-button active" data-tab="tab1">Validação Guiada</button>
+                <button class="tab-button" data-tab="tab2">Contagem Cíclica</button>
+                <button class="tab-button" data-tab="tab3">Leitura Direta</button>
+                <button class="tab-button" data-tab="tab4">Exportação de Relatórios</button>
+            </div>
+
+            <div id="tab-content" class="bg-wh
