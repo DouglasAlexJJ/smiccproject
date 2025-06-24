@@ -13,7 +13,7 @@
     <!-- Application Structure Plan: A single-page, "scrollytelling" dashboard. The structure begins with a high-level summary and a clear 'Problem vs. Solution' comparison. It then flows into an interactive tabbed section for exploring core functionalities, a new visual gallery of app screens for a concrete look-and-feel, a qualitative 'Operational Impact' section, and finally the tech architecture. This flow guides the user from the abstract problem to a tangible, visual solution and its benefits. -->
     <!-- Visualization & Content Choices: 
         - Problem vs. Solution: Goal -> Compare. Method -> Two-column layout with lists and icons (HTML/Tailwind). Justification -> Quickly establishes the project's core value proposition.
-        - App Screens Gallery: Goal -> Inform & Visualize. Method -> Responsive grid of image cards with captions (HTML/Tailwind), now using direct links to an external image host (Imgur) for reliability. Justification -> Adds a crucial visual layer, making the application's functionality tangible.
+        - App Screens Gallery: Goal -> Inform & Visualize. Method -> Responsive grid of image cards with captions (HTML/Tailwind), using direct raw links from the user's GitHub repository with URL encoding. Interaction -> Added a click-to-zoom modal for detailed viewing. Justification -> This allows the audience to inspect UI details, making the presentation more interactive and informative.
         - Core Functionalities: Goal -> Organize & Inform. Method -> Tabbed interface (HTML/Tailwind/JS). Interaction -> User clicks tabs to reveal detailed descriptions. Justification -> Allows non-linear exploration of features.
         - Operational Impact: Goal -> Inform & Emphasize. Method -> Four-column card layout with icons and descriptive text (HTML/Tailwind). Justification -> Focuses on qualitative, factual statements of benefit.
         - Tech Architecture: Goal -> Inform. Method -> Styled divs representing a flowchart (HTML/Tailwind). Justification -> A clean, visual representation of the technical foundation.
@@ -27,6 +27,16 @@
             background-color: #0284c7; /* sky-600 */
             color: white;
             border-color: #0284c7; /* sky-600 */
+        }
+        .gallery-image {
+            cursor: zoom-in;
+            transition: transform 0.2s ease-in-out;
+        }
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        #imageModal {
+            transition: opacity 0.3s ease;
         }
     </style>
 </head>
@@ -83,58 +93,58 @@
         <section id="telas-app" class="py-16 scroll-mt-20">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Conheça o Aplicativo</h2>
-                <p class="mt-2 text-lg text-slate-500">Uma galeria visual do fluxo de trabalho do SMICC em ação.</p>
+                <p class="mt-2 text-lg text-slate-500">Uma galeria visual do fluxo de trabalho do SMICC em ação. Clique na imagem para ampliar.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
-                    <img src="https://i.imgur.com/zA1T2QE.png" alt="Tela de Login do SMICC" class="rounded-lg mb-4 w-full max-w-xs">
+                    <img src="https://raw.githubusercontent.com/DouglasAlexJJ/smiccproject/main/imagens/TELA%20INICIAL.png" alt="Tela de Login do SMICC" class="gallery-image rounded-lg mb-4 w-full max-w-xs">
                     <h4 class="font-bold text-slate-800">1. Tela Inicial</h4>
-                    <p class="text-sm text-slate-600">Login por matrícula para garantir a rastreabilidade de todas as ações.</p>
+                    <p class="text-sm text-slate-600">Login por matrícula para garantir a rastreabilidade.</p>
                 </div>
                  <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
-                    <img src="https://i.imgur.com/VLwwaNu.png" alt="Menu Principal" class="rounded-lg mb-4 w-full max-w-xs">
+                    <img src="https://raw.githubusercontent.com/DouglasAlexJJ/smiccproject/main/imagens/MANU%20PRINCIPAL%20ESCOLHA%20ENTRE%20VALIDAR%20ETIQUETAS%20OU%20INVENT%C3%81RIO%20C%C3%8DCLICO.png" alt="Menu Principal" class="gallery-image rounded-lg mb-4 w-full max-w-xs">
                     <h4 class="font-bold text-slate-800">2. Menu Principal</h4>
-                    <p class="text-sm text-slate-600">Escolha entre os módulos de "Validar Etiquetas" ou "Inventário Cíclico".</p>
+                    <p class="text-sm text-slate-600">Escolha entre "Validar Etiquetas" ou "Inventário Cíclico".</p>
                 </div>
                  <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
-                    <img src="https://i.imgur.com/JfCfqYI.png" alt="Modo Validação" class="rounded-lg mb-4 w-full max-w-xs">
+                    <img src="https://raw.githubusercontent.com/DouglasAlexJJ/smiccproject/main/imagens/MODO%20VALIDA%C3%87%C3%83O%20ESCOLHA%20ENTRE%20INVENTARIO%20POR%20ARQUIVO%20OU%20LEITURA%20DIRETA.png" alt="Modo Validação" class="gallery-image rounded-lg mb-4 w-full max-w-xs">
                     <h4 class="font-bold text-slate-800">3. Modo Validação</h4>
-                    <p class="text-sm text-slate-600">Opções de "Inventário por Arquivo" (guiado) ou "Leitura Direta" (cega).</p>
+                    <p class="text-sm text-slate-600">Opções de "Inventário por Arquivo" ou "Leitura Direta".</p>
                 </div>
                  <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
-                    <img src="https://i.imgur.com/dTxcUuM.png" alt="Tela de Carregar Arquivo" class="rounded-lg mb-4 w-full max-w-xs">
+                    <img src="https://raw.githubusercontent.com/DouglasAlexJJ/smiccproject/main/imagens/TELA%20DE%20CARREGAR%20ARQUIVO.png" alt="Tela de Carregar Arquivo" class="gallery-image rounded-lg mb-4 w-full max-w-xs">
                     <h4 class="font-bold text-slate-800">4. Carregar Arquivo</h4>
-                    <p class="text-sm text-slate-600">O primeiro passo do modo guiado é carregar o arquivo base (Excel/CSV).</p>
+                    <p class="text-sm text-slate-600">O primeiro passo do modo guiado é carregar o arquivo base.</p>
                 </div>
                  <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
-                    <img src="https://i.imgur.com/TcE4vgR.png" alt="Escolha Pós-Carregamento" class="rounded-lg mb-4 w-full max-w-xs">
-                    <h4 class="font-bold text-slate-800">5. Escolha Pós-Carregamento</h4>
-                    <p class="text-sm text-slate-600">Com o arquivo carregado, o sistema confirma o sucesso e apresenta os modos de leitura.</p>
+                    <img src="https://raw.githubusercontent.com/DouglasAlexJJ/smiccproject/main/imagens/ESCOLHA%20MODO%20DE%20LEITURA%20COM%20ARQUIVO%20CARREGADO.png" alt="Escolha Pós-Carregamento" class="gallery-image rounded-lg mb-4 w-full max-w-xs">
+                    <h4 class="font-bold text-slate-800">5. Arquivo Carregado</h4>
+                    <p class="text-sm text-slate-600">Sucesso! O operador escolhe o modo de leitura desejado.</p>
                 </div>
                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
-                    <img src="https://i.imgur.com/KHEVyYm.png" alt="Seleção de Localização" class="rounded-lg mb-4 w-full max-w-xs">
+                    <img src="https://raw.githubusercontent.com/DouglasAlexJJ/smiccproject/main/imagens/SELECIONAR%20LOCALIZA%C3%87%C3%83O.png" alt="Seleção de Localização" class="gallery-image rounded-lg mb-4 w-full max-w-xs">
                     <h4 class="font-bold text-slate-800">6. Seleção de Localização</h4>
                     <p class="text-sm text-slate-600">O operador informa ou lê o código da localização que irá auditar.</p>
                 </div>
                  <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
-                    <img src="https://i.imgur.com/JKMztIO.png" alt="Paletes Validados" class="rounded-lg mb-4 w-full max-w-xs">
+                    <img src="https://raw.githubusercontent.com/DouglasAlexJJ/smiccproject/main/imagens/TELA%20COM%20PALETES%20VALIDADOS.png" alt="Paletes Validados" class="gallery-image rounded-lg mb-4 w-full max-w-xs">
                     <h4 class="font-bold text-slate-800">7. Validação em Andamento</h4>
-                    <p class="text-sm text-slate-600">Feedback visual em tempo real sobre os paletes validados no local.</p>
+                    <p class="text-sm text-slate-600">Feedback visual em tempo real sobre os paletes validados.</p>
                 </div>
                  <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
-                    <img src="https://i.imgur.com/VpUUCjS.png" alt="Leitura Direta" class="rounded-lg mb-4 w-full max-w-xs">
+                    <img src="https://raw.githubusercontent.com/DouglasAlexJJ/smiccproject/main/imagens/TELA%20COM%20PALETES%20NA%20LEITURA%20DIRETA.png" alt="Leitura Direta" class="gallery-image rounded-lg mb-4 w-full max-w-xs">
                     <h4 class="font-bold text-slate-800">8. Leitura Direta em Ação</h4>
-                    <p class="text-sm text-slate-600">No modo "cego", o app lista todas as leituras realizadas sequencialmente.</p>
+                    <p class="text-sm text-slate-600">O app lista todas as leituras realizadas sequencialmente.</p>
                 </div>
                  <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
-                    <img src="https://i.imgur.com/sVQKoal.png" alt="Confirmar Exclusão" class="rounded-lg mb-4 w-full max-w-xs">
+                    <img src="https://raw.githubusercontent.com/DouglasAlexJJ/smiccproject/main/imagens/CONFIRMAR%20EXCLUS%C3%83O.png" alt="Confirmar Exclusão" class="gallery-image rounded-lg mb-4 w-full max-w-xs">
                     <h4 class="font-bold text-slate-800">9. Ação de Segurança</h4>
-                    <p class="text-sm text-slate-600">Para evitar erros, o sistema solicita confirmação antes de excluir um item.</p>
+                    <p class="text-sm text-slate-600">O sistema solicita confirmação antes de excluir um item.</p>
                 </div>
                  <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 flex flex-col items-center text-center">
-                    <img src="https://i.imgur.com/OeEeda1.png" alt="Exportar Arquivo" class="rounded-lg mb-4 w-full max-w-xs">
+                    <img src="https://raw.githubusercontent.com/DouglasAlexJJ/smiccproject/main/imagens/TELA%20DE%20EXPORTAR%20ARQUIVO%20ATIVO.png" alt="Exportar Arquivo" class="gallery-image rounded-lg mb-4 w-full max-w-xs">
                     <h4 class="font-bold text-slate-800">10. Exportação</h4>
-                    <p class="text-sm text-slate-600">Ao finalizar, o botão de exportar fica ativo para gerar o relatório consolidado.</p>
+                    <p class="text-sm text-slate-600">Ao finalizar, o botão de exportar fica ativo para gerar o relatório.</p>
                 </div>
             </div>
         </section>
@@ -152,4 +162,194 @@
                 <button class="tab-button" data-tab="tab4">Exportação de Relatórios</button>
             </div>
 
-            <div id="tab-content" class="bg-wh
+            <div id="tab-content" class="bg-white p-6 md:p-10 rounded-xl shadow-lg border border-slate-200 min-h-[300px]">
+                <div id="tab1" class="tab-pane active">
+                    <h3 class="text-2xl font-bold text-sky-700 mb-4">Fluxo 1: Validação por Arquivo (Leitura Guiada)</h3>
+                    <p class="mb-4">Ideal para inventários planejados, este modo utiliza um arquivo base (Excel/CSV) para guiar o operador. O sistema valida não apenas a existência do palete, mas se ele está no local esperado, garantindo máxima precisão.</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Validação Inteligente:</strong> Alerta o operador sobre paletes em locais incorretos.</li>
+                        <li><strong>Feedback Visual:</strong> Cores indicam o status da contagem (lido, pendente, erro).</li>
+                        <li><strong>Sessão Persistente:</strong> Permite pausar e retomar a contagem sem perder progresso.</li>
+                        <li><strong>Funções de Correção:</strong> Facilita o registro de paletes sem ID e a exclusão de leituras erradas.</li>
+                    </ul>
+                </div>
+                <div id="tab2" class="tab-pane hidden">
+                    <h3 class="text-2xl font-bold text-sky-700 mb-4">Fluxo 2: Contagem Cíclica (com Arquivo)</h3>
+                    <p class="mb-4">Este fluxo combina a validação de local com a contagem de quantidade. Após validar o palete e o local, o sistema solicita a inserção rápida da quantidade, otimizado para o teclado físico do coletor.</p>
+                     <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Processo em 2 Passos:</strong> 1. Valida Local. 2. Insere Quantidade.</li>
+                        <li><strong>Agilidade Máxima:</strong> Otimizado para uso da tecla "Enter" para confirmar e avançar.</li>
+                        <li><strong>Consistência:</strong> Mantém o mesmo sistema de feedback visual e persistência de sessão do Fluxo 1.</li>
+                    </ul>
+                </div>
+                <div id="tab3" class="tab-pane hidden">
+                    <h3 class="text-2xl font-bold text-sky-700 mb-4">Fluxo 3: Leitura Direta (Sem Arquivo)</h3>
+                    <p class="mb-4">Perfeito para contagens rápidas e não planejadas, este modo "cego" não requer nenhum arquivo base. O operador simplesmente informa um local e começa a ler todos os paletes que encontrar.</p>
+                     <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Flexibilidade Total:</strong> Não depende de arquivos pré-existentes.</li>
+                        <li><strong>Criação de Inventário:</strong> Gera um novo registro de contagem do zero.</li>
+                        <li><strong>Exportação Dedicada:</strong> Possui sua própria função para gerar relatórios simples da contagem realizada.</li>
+                    </ul>
+                </div>
+                 <div id="tab4" class="tab-pane hidden">
+                    <h3 class="text-2xl font-bold text-sky-700 mb-4">Feature Essencial: Exportação de Relatórios</h3>
+                    <p class="mb-4">Todos os modos de operação culminam em uma poderosa funcionalidade de exportação. Os dados consolidados estão disponíveis instantaneamente para análise gerencial.</p>
+                     <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Exportação Instantânea:</strong> Relatórios em CSV gerados com um clique.</li>
+                        <li><strong>Formato Compatível:</strong> Arquivos formatados com ponto e vírgula, prontos para o Excel.</li>
+                        <li><strong>Dados Completos:</strong> Inclui matrícula do operador, data/hora, status e todas as informações da contagem.</li>
+                         <li><strong>Agilidade Total:</strong> Relatórios podem ser compartilhados diretamente do coletor.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="impacto" class="py-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Impacto Direto na Operação</h2>
+                <p class="mt-2 text-lg text-slate-500">O valor do SMICC traduzido em ganhos qualitativos para o negócio.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+                    <div class="text-3xl text-sky-600 mb-4">🚀</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Eficiência Drástica</h3>
+                    <p class="text-slate-600">Eliminação completa da consolidação manual de dados e redução massiva do tempo de contagem no chão de fábrica.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+                     <div class="text-3xl text-sky-600 mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Acuracidade Máxima</h3>
+                    <p class="text-slate-600">Fim dos erros de digitação e aumento da confiabilidade do estoque através da validação instantânea no local.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+                     <div class="text-3xl text-sky-600 mb-4">🔗</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Rastreabilidade Total</h3>
+                    <p class="text-slate-600">Responsabilização clara e completa de cada contagem através do login obrigatório por matrícula do operador.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+                     <div class="text-3xl text-sky-600 mb-4">📊</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Agilidade Gerencial</h3>
+                    <p class="text-slate-600">Dados precisos e consolidados disponíveis em segundos, permitindo tomadas de decisão mais rápidas e informadas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="arquitetura" class="py-16">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Tecnologia e Arquitetura</h2>
+                <p class="mt-2 text-lg text-slate-500">Uma base sólida que garante performance, escalabilidade e facilidade de manutenção.</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-10 items-center">
+                 <div class="flex justify-center items-center gap-4 md:gap-8">
+                     <div class="text-center">
+                         <div class="bg-sky-100 text-sky-800 p-4 rounded-lg shadow-md">
+                             <h4 class="font-bold text-lg">Flutter & Dart</h4>
+                         </div>
+                         <p class="text-sm mt-2 text-slate-500">Plataforma Moderna</p>
+                     </div>
+                     <div class="text-center">
+                          <div class="bg-indigo-100 text-indigo-800 p-4 rounded-lg shadow-md">
+                             <h4 class="font-bold text-lg">GetX</h4>
+                         </div>
+                         <p class="text-sm mt-2 text-slate-500">Gestão de Estado</p>
+                     </div>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-200">
+                    <h4 class="text-xl font-bold text-slate-800 text-center mb-4">Arquitetura Limpa</h4>
+                    <div class="flex justify-around items-center">
+                        <div class="text-center p-2 bg-slate-100 rounded-md">
+                            <p class="font-semibold text-slate-700">Views</p>
+                            <p class="text-xs text-slate-500">Interface</p>
+                        </div>
+                         <span class="text-2xl font-light text-slate-400">↔️</span>
+                        <div class="text-center p-2 bg-slate-100 rounded-md">
+                            <p class="font-semibold text-slate-700">Controllers</p>
+                            <p class="text-xs text-slate-500">Lógica de Tela</p>
+                        </div>
+                        <span class="text-2xl font-light text-slate-400">↔️</span>
+                        <div class="text-center p-2 bg-slate-100 rounded-md">
+                            <p class="font-semibold text-slate-700">Services</p>
+                            <p class="text-xs text-slate-500">Lógica de Negócio</p>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para zoom da imagem -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50 p-4">
+        <span id="closeModal" class="absolute top-5 right-8 text-white text-5xl font-bold cursor-pointer hover:text-slate-300">&times;</span>
+        <img id="modalImage" src="" alt="Tela do App em zoom" class="max-w-[90vw] max-h-[90vh] object-contain">
+    </div>
+
+    <footer class="bg-slate-800 text-white text-center p-6 mt-16">
+        <div class="text-slate-300 mb-4">
+            <p id="presenter-info"></p>
+            <p id="date-info"></p>
+        </div>
+        <p>&copy; 2025 Projeto SMICC. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lógica das abas
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const tabId = button.getAttribute('data-tab');
+                    
+                    tabPanes.forEach(pane => {
+                        pane.classList.toggle('hidden', pane.id !== tabId);
+                    });
+                });
+            });
+
+            // Lógica do Modal de Zoom
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const galleryImages = document.querySelectorAll('.gallery-image');
+            const closeModal = document.getElementById('closeModal');
+
+            galleryImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    modalImg.src = this.src;
+                });
+            });
+
+            const closeZoom = () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+
+            closeModal.addEventListener('click', closeZoom);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeZoom();
+                }
+            });
+
+            // Lógica das informações do rodapé
+            const presenterInfo = document.getElementById('presenter-info');
+            if(presenterInfo) {
+                presenterInfo.innerHTML = `<span class="font-semibold">Apresentado por:</span> Douglas Alexander dos Santos`;
+            }
+
+            const dateInfo = document.getElementById('date-info');
+            if (dateInfo) {
+                const today = new Date();
+                const day = today.getDate();
+                const month = today.toLocaleString('pt-BR', { month: 'long' });
+                const year = today.getFullYear();
+                dateInfo.innerHTML = `<span class="font-semibold">Data da Apresentação:</span> ${day} de ${month} de ${year}`;
+            }
+        });
+    </script>
+</body>
+</html>
